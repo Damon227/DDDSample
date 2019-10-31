@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>wwwroot\DDDSample.WebApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DDDSample.Infrastructure\DDDSample.Infrastructure.csproj" />
+    <ProjectReference Include="..\DDDSample.Application\DDDSample.Application.csproj" />
+    <ProjectReference Include="..\DDDSample.Data\DDDSample.Data.csproj" />
+    <ProjectReference Include="..\DDDSample.Domain.Core\DDDSample.Domain.Core.csproj" />
+    <ProjectReference Include="..\DDDSample.Domain\DDDSample.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
