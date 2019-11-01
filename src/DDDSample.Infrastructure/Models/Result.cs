@@ -39,7 +39,7 @@
 
         public static Result<T> Success(T data)
         {
-            return Success(0, null, data);
+            return Success(0, "操作成功", data);
         }
 
         public static Result<T> Success(string message, T data)

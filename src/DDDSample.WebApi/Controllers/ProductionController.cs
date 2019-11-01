@@ -38,7 +38,7 @@ namespace DDDSample.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("UpdateName/{productionId}/{name}")]
+        [Route("UpdateName/{productionId:length(32)}/{name:maxlength(20)}")]
         public async Task<IActionResult> UpdateName(string productionId, string name)
         {
             Result result = await _productionApplicationService.UpdateNameAsync(productionId, name);
@@ -52,7 +52,7 @@ namespace DDDSample.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Get/{productionId}")]
+        [Route("Get/{productionId:length(32)}")]
         public async Task<IActionResult> Get(string productionId)
         {
             ProductionDto productionDto = await _productionApplicationService.GetAsync(productionId);

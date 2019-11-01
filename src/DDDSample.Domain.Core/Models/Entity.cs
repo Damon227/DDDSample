@@ -13,7 +13,7 @@ namespace DDDSample.Domain.Core.Models
             EntityId = ID.NewSequentialGuid().ToGuidString();
             CreateTime = UpdateTime = Time.Now;
             Enable = true;
-            RowVersion = ID.NewSequentialGuid().ToGuidString();
+            ConcurrencyToken = ID.NewSequentialGuid().ToGuidString();
         }
 
         public long Id { get; protected set; }
@@ -26,6 +26,6 @@ namespace DDDSample.Domain.Core.Models
 
         public bool Enable { get; protected set; }
 
-        public string RowVersion { get; protected set; }
+        public string ConcurrencyToken { get; protected set; }
     }
 }

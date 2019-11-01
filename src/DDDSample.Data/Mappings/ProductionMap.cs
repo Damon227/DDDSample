@@ -33,7 +33,7 @@ namespace DDDSample.Data.Mappings
 
             //builder.Property(t => t.Enable).IsRequired();
 
-            //builder.Property(t => t.RowVersion).IsConcurrencyToken();
+            builder.Property(t => t.ConcurrencyToken).IsConcurrencyToken();
 
             builder.Ignore("Desc");
 

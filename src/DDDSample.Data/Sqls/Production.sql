@@ -14,6 +14,6 @@ CREATE TABLE [dbo].[DDDSample.Productions] (
 [Enable] BIT NOT NULL ,
 [CreateTime] DATETIMEOFFSET NOT NULL ,
 [UpdateTime] DATETIMEOFFSET NOT NULL ,
-[RowVersion] VARCHAR(63) NOT NULL,
+[ConcurrencyToken] VARCHAR(63) NOT NULL,
 PRIMARY KEY ([Id])
 )

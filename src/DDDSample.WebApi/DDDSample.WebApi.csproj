@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DDDSample.Infrastructure\DDDSample.Infrastructure.csproj" />
     <ProjectReference Include="..\DDDSample.Application\DDDSample.Application.csproj" />
     <ProjectReference Include="..\DDDSample.Data\DDDSample.Data.csproj" />
     <ProjectReference Include="..\DDDSample.Domain.Core\DDDSample.Domain.Core.csproj" />
     <ProjectReference Include="..\DDDSample.Domain\DDDSample.Domain.csproj" />
+    <ProjectReference Include="..\DDDSample.Infrastructure\DDDSample.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,3 +8,6 @@ DDDSample 是基于 ASP.NET CORE2.2 的DDD示例项目。
 		Services
 	Data
 	Infrastructures
+
+API Route constraint reference
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-3.0
