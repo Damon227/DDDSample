@@ -37,14 +37,14 @@ namespace DDDSample.Data.Repository
             DbSet.Update(entity);
         }
 
-        public virtual void Remove(string entityId)
+        public virtual void Remove(string id)
         {
-            DbSet.Remove(DbSet.AsNoTracking().FirstOrDefault(t => t.EntityId == entityId));
+            DbSet.Remove(DbSet.AsNoTracking().FirstOrDefault(t => t.Id == id));
         }
 
-        public virtual async Task<TEntity> GetByEntityIdAsync(string entityId)
+        public virtual async Task<TEntity> GetByIdAsync(string id)
         {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(t => t.EntityId == entityId);
+            return await DbSet.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public virtual async Task<int> SaveChangesAsync()

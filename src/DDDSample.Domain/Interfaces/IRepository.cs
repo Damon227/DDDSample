@@ -10,8 +10,8 @@ namespace DDDSample.Domain.Interfaces
     {
         void Add(TEntity entity);
         void Update(TEntity entity);
-        void Remove(string entityId);
-        Task<TEntity> GetByEntityIdAsync(string entityId);
+        void Remove(string id);
+        Task<TEntity> GetByIdAsync(string id);
         Task<int> SaveChangesAsync();
     }
 }

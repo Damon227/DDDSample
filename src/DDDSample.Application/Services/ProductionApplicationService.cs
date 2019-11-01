@@ -54,7 +54,7 @@ namespace DDDSample.Application.Services
             _repository.Add(production);
             if (await _unitOfWork.CommitAsync())
             {
-                await _mediator.Publish(new ProductionCreatedEvent(production.EntityId, production.Name, production.FullName, production.Price));
+                await _mediator.Publish(new ProductionCreatedEvent(production.Id, production.Name, production.FullName, production.Price));
             }
 
             return Result<ProductionDto>.Success(_mapper.Map<ProductionDto>(production));
@@ -67,7 +67,7 @@ namespace DDDSample.Application.Services
                 throw new ArgumentNullException(nameof(productionId));
             }
 
-            Production production = await _repository.GetByEntityIdAsync(productionId);
+            Production production = await _repository.GetByIdAsync(productionId);
 
             return _mapper.Map<ProductionDto>(production);
         }
@@ -84,7 +84,7 @@ namespace DDDSample.Application.Services
                 throw new ArgumentNullException(nameof(name));
             }
            
-            Production production = await _repository.GetByEntityIdAsync(productionId);
+            Production production = await _repository.GetByIdAsync(productionId);
             Result result = await _productionDomainService.UpdateNameAsync(production, name);
 
             if (result.Succeed)
