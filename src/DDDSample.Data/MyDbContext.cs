@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DDDSample.Data.Mappings;
+using DDDSample.Domain.House.Models;
+using DDDSample.Domain.TradeCenter.Models;
 using DDDSample.Infrastructure.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -25,13 +27,15 @@ namespace DDDSample.Data.Production
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
-        public DbSet<Domain.Production.Models.Production> Productions { get; set; }
+        public DbSet<House> Houses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ProductionMap());
+            modelBuilder.ApplyConfiguration(new HouseMap());
+            modelBuilder.ApplyConfiguration(new TradeRecordMap());
 
-            modelBuilder.Entity<Domain.Production.Models.Production>().HasQueryFilter(t => t.Enable);
+            modelBuilder.Entity<House>().HasQueryFilter(t => t.Enable);
+            modelBuilder.Entity<TradeRecord>().HasQueryFilter(t => t.Enable);
 
             base.OnModelCreating(modelBuilder);
         }

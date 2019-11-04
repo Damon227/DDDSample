@@ -1,19 +1,24 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DDDSample.Data;
+using DDDSample.Domain.EventHandlers;
 using DDDSample.WebApi.Extensions;
+using DDDSample.WebApi.Middlewares;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace DDDSample.WebApi
@@ -33,7 +38,13 @@ namespace DDDSample.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+                {
+                    options.RespectBrowserAcceptHeader = true;
+                    options.OutputFormatters.Clear();
+                    options.OutputFormatters.Add(new JsonOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared));
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
             {
@@ -42,7 +53,7 @@ namespace DDDSample.WebApi
             });
 
             services.RegisterAutoMapper();
-            services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(HouseEventHandler));
 
             NativeInjector.RegisterServies(services, Configuration);
         }
@@ -59,6 +70,8 @@ namespace DDDSample.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseMvc();

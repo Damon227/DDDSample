@@ -8,8 +8,4 @@
     <ProjectReference Include="..\DDDSample.Domain.Core\DDDSample.Domain.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="House\Services\" />
-  </ItemGroup>
-
 </Project>

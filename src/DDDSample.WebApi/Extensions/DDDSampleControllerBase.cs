@@ -18,13 +18,13 @@ namespace DDDSample.WebApi.Extensions
         }
 
         [NonAction]
-        public OkObjectResult Error(string message)
+        public OkObjectResult Fail(string message)
         {
             return base.Ok(Result.Fail(message));
         }
 
         [NonAction]
-        public OkObjectResult Error(int code, string message)
+        public OkObjectResult Fail(int code, string message)
         {
             return base.Ok(Result.Fail(code, message));
         }

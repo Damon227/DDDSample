@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using DDDSample.Application.DtoModels.House;
 using DDDSample.Application.DtoModels.Production;
-using DDDSample.Domain.Production.Models;
+using DDDSample.Domain.House.Models;
 
 namespace DDDSample.Application.AutoMapper
 {
@@ -11,7 +12,7 @@ namespace DDDSample.Application.AutoMapper
     {
         public DomainToDtoMappingProfile()
         {
-            CreateMap<Production, ProductionDto>();
+            CreateMap<House, HouseDto>();
         }
     }
 }

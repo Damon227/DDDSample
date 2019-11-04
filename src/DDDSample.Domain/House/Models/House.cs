@@ -7,7 +7,7 @@ namespace DDDSample.Domain.House.Models
 {
     public class House : Entity
     {
-        public House(string ownerId, string name, string address, float area)
+        public House(string ownerId, string name, string address, double area)
         {
             if (string.IsNullOrEmpty(ownerId))
             {
@@ -39,7 +39,7 @@ namespace DDDSample.Domain.House.Models
 
         public string Address { get; protected set; }
 
-        public float Area { get; protected set; }
+        public double Area { get; protected set; }
 
         public void UpdateName(string name)
         {
