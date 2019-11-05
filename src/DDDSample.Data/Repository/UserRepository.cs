@@ -17,7 +17,7 @@ namespace DDDSample.Data.Repository
 
         public async Task<User> GetUserByIDNoAsync(string idNo)
         {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(t => t.IDNo == idNo);
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(t => t.IDNo == idNo);
         }
     }
 }
