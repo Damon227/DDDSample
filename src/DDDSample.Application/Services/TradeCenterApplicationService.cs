@@ -8,6 +8,7 @@ using DDDSample.Domain.House.Models;
 using DDDSample.Domain.Interfaces;
 using DDDSample.Domain.TradeCenter.Models;
 using DDDSample.Domain.TradeCenter.Services.Interfaces;
+using DDDSample.Infrastructure.MediatR;
 using DDDSample.Infrastructure.Models;
 using MediatR;
 
@@ -18,18 +19,18 @@ namespace DDDSample.Application.Services
         private readonly ITradeRecordRepository _tradeRecordRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITradeCenterDomainService _tradeCenterDomainService;
-        private readonly IMediator _mediator;
+        private readonly Publisher _publisher;
 
         public TradeCenterApplicationService(
             ITradeRecordRepository tradeRecordRepository, 
             IUnitOfWork unitOfWork, 
-            ITradeCenterDomainService tradeCenterDomainService, 
-            IMediator mediator)
+            ITradeCenterDomainService tradeCenterDomainService,
+            Publisher publisher)
         {
             _tradeRecordRepository = tradeRecordRepository;
             _unitOfWork = unitOfWork;
             _tradeCenterDomainService = tradeCenterDomainService;
-            _mediator = mediator;
+            _publisher = publisher;
         }
 
         public async Task<Result<TradeRecord>> CreateTradeRecordAsync(string houseId, string sellerId, string buyerId, string description = null)
@@ -46,7 +47,7 @@ namespace DDDSample.Application.Services
             if (await _unitOfWork.CommitAsync())
             {
                 // send event to house and wait
-                await _mediator.Publish(new HouseTradedEvent(houseId, buyerId));
+                await _publisher.Publish(new HouseTradedEvent(houseId, buyerId), PublishStrategy.ParallelNoWait);
             }
 
             return Result<TradeRecord>.Success(tradeRecord);
